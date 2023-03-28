@@ -1,4 +1,4 @@
-![Order Logo](order.png)
+![Order Logo](src/main/java/com/eurder/order.png)
 
 Örder is an innovative (not really) order management application. The front-end 
 will be a beautiful designed javascript-based application that will communicate with an even more 
@@ -47,19 +47,6 @@ of stories: **Must-Have's** and **Nice-To-Have's**. Start with the Must-Have's, 
     - Write your DDL (create tables,...) in a separate `.sql` file, which you also put under version control.
 - Use Jenkins to set up a Continuous Integration (CI) pipeline.
     - Additionally, but optional, deploy to Heroku!
-- Think about Security: authentication and authorization. It is not a priority, but if you have the time, implement it properly.
-    - Until then, you can neglect the fact that certain endpoints should only be usable by - for example - an administrator.
-
-## Technical requirements for .NET
-
-- Create a new GitHub repository 
-- Use REST (with JSON as the message / body format)
-- Use ASP.NET Core Web Api
-- Use AzureDevops for continuous integration
-- Perform logging (use logging provided by .NET Core)
-    - Certainly log all interactions with the application that can be defined as "errors"
-            - E.g.: unauthorized access, illegal arguments, exceptions in general,...
-- Use Swagger to provide a readable document of your WebApi
 - Think about Security: authentication and authorization. It is not a priority, but if you have the time, implement it properly.
     - Until then, you can neglect the fact that certain endpoints should only be usable by - for example - an administrator.
 
