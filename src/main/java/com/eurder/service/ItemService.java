@@ -19,8 +19,7 @@ public class ItemService {
 	}
 
 	public ItemDTO addItem(CreateItemDTO createItemDTO){
-		//TODO vallidation
-
+		validateMandatoryItemFields(createItemDTO);
 		return itemMapper.mapToDTO(itemRepository.addItem(itemMapper.mapCreateItemDTOToDomain(createItemDTO)));
 	}
 

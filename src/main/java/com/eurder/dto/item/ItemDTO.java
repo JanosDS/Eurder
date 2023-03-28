@@ -34,4 +34,8 @@ public class ItemDTO {
 	public int getAmountInStock() {
 		return amountInStock;
 	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
 }
