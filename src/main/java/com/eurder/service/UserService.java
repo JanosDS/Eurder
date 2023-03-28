@@ -1,7 +1,6 @@
 package com.eurder.service;
 
 import com.eurder.domain.user.Role;
-import com.eurder.domain.user.User;
 import com.eurder.dto.user.AddressDTO;
 import com.eurder.dto.user.CreateUserDTO;
 import com.eurder.dto.user.UserDTO;
@@ -44,53 +43,54 @@ public class UserService {
 						userMapper.mapCreateUserDTOToDomain(Role.setRoleToAdmin(createUserDTO))));
 	}
 
-	private void validateEmail(String email){
-		if(!isValidEmailFormat(email)){
+	private void validateEmail(String email) {
+		if (!isValidEmailFormat(email)) {
 			throw new InvalidInputException(email + " is not a valid email format.");
 		}
 	}
 
-	public void validateMandatoryCustomerFields(CreateUserDTO createUserDTO){
-		if(createUserDTO.getFirstname() == null){
+	public void validateMandatoryCustomerFields(CreateUserDTO createUserDTO) {
+		if (createUserDTO.getFirstname() == null) {
 			throw new MandatoryFieldException("The firstname field cannot be empty.");
 		}
-		if(createUserDTO.getLastname() == null){
+		if (createUserDTO.getLastname() == null) {
 			throw new MandatoryFieldException("The lastname field cannot be empty.");
 		}
-		if(createUserDTO.getEmail() == null){
+		if (createUserDTO.getEmail() == null) {
 			throw new MandatoryFieldException("The email field cannot be empty.");
 		}
-		if(createUserDTO.getPhonenumber() == null){
+		if (createUserDTO.getPhonenumber() == null) {
 			throw new MandatoryFieldException("The phone number field cannot be empty.");
 		}
-		if(createUserDTO.getAddressDTO() == null){
+		if (createUserDTO.getAddressDTO() == null) {
 			throw new MandatoryFieldException("The address field cannot be empty.");
 		}
 	}
 
-	public void validateAddress(AddressDTO addressDTO){
-		if(addressDTO.getCity() == null){
+	public void validateAddress(AddressDTO addressDTO) {
+		if (addressDTO.getCity() == null) {
 			throw new MandatoryFieldException("The city field cannot be empty.");
 		}
-		if(addressDTO.getStreet() == null){
+		if (addressDTO.getStreet() == null) {
 			throw new MandatoryFieldException("The street field cannot be empty.");
 		}
-		if(addressDTO.getNumber() == null){
+		if (addressDTO.getNumber() == null) {
 			throw new MandatoryFieldException("The housenumber field cannot be empty.");
 		}
-		if(addressDTO.getCountry() == null){
+		if (addressDTO.getCountry() == null) {
 			throw new MandatoryFieldException("The country field cannot be empty.");
 		}
-		if(addressDTO.getPostalCode() == null){
+		if (addressDTO.getPostalCode() == null) {
 			throw new MandatoryFieldException("The postalcode field cannot be empty.");
 		}
 	}
 
-	public boolean isValidEmailFormat(String email){
+	public boolean isValidEmailFormat(String email) {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 		Pattern pat = Pattern.compile(emailRegex);
-		if (email == null)
+		if (email == null) {
 			return false;
+		}
 		return pat.matcher(email).matches();
 	}
 }
