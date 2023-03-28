@@ -1,4 +1,4 @@
-package com.eurder.mapper;
+package com.eurder.mapper.user;
 
 import com.eurder.domain.user.Address;
 import com.eurder.dto.user.AddressDTO;

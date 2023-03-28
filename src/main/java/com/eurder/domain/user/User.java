@@ -10,13 +10,16 @@ public class User {
 	private Address address;
 	private String phonenumber;
 
-	public User(String firstname, String lastname, String email, Address address, String phonenumber) {
+	private Role role;
+
+	public User(String firstname, String lastname, String email, Address address, String phonenumber, Role role) {
 		this.uuid = UUID.randomUUID();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.address = address;
 		this.phonenumber = phonenumber;
+		this.role = role;
 	}
 
 	public UUID getUuid() {

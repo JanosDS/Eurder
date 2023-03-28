@@ -1,4 +1,4 @@
-package com.eurder.mapper;
+package com.eurder.mapper.user;
 
 import com.eurder.domain.user.User;
 import com.eurder.dto.user.CreateUserDTO;
@@ -15,7 +15,8 @@ public class UserMapper {
 	}
 
 	public User mapCreateUserDTOToDomain(CreateUserDTO createUserDTO){
-		return new User(createUserDTO.getFirstname(), createUserDTO.getLastname(), createUserDTO.getEmail(), addressMapper.mapToDomain(createUserDTO.getAddressDTO()), createUserDTO.getPhonenumber());
+		return new User(createUserDTO.getFirstname(), createUserDTO.getLastname(), createUserDTO.getEmail(),
+				addressMapper.mapToDomain(createUserDTO.getAddressDTO()), createUserDTO.getPhonenumber(), createUserDTO.getRole());
 	}
 
 	public UserDTO mapToDTO(User user){

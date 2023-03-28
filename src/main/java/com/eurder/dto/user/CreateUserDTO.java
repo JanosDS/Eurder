@@ -2,6 +2,8 @@ package com.eurder.dto.user;
 
 
 
+import com.eurder.domain.user.Role;
+
 import java.util.UUID;
 
 public class CreateUserDTO {
@@ -12,6 +14,7 @@ public class CreateUserDTO {
 	private AddressDTO addressDTO;
 	private String phonenumber;
 
+	private Role role;
 	public CreateUserDTO(String firstname, String lastname, String email, AddressDTO addressDTO, String phonenumber) {
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -38,5 +41,14 @@ public class CreateUserDTO {
 
 	public String getPhonenumber() {
 		return phonenumber;
+	}
+
+	public CreateUserDTO setRole(Role role) {
+		this.role = role;
+		return this;
+	}
+
+	public Role getRole() {
+		return role;
 	}
 }
