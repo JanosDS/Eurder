@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class AddressMapper {
 
 	public Address mapToDomain(AddressDTO addressDTO){
-		return new Address();
+		return new Address(addressDTO.getStreet(), addressDTO.getNumber(), addressDTO.getPostalCode(), addressDTO.getCity(), addressDTO.getCountry());
 	}
 
 }

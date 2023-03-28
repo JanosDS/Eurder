@@ -25,7 +25,6 @@ public class UserService {
 	}
 
 	public UserDTO createCustomer(CreateUserDTO createUserDTO) {
-		//TODO vallidation
 		validateMandatoryCustomerFields(createUserDTO);
 		validateAddress(createUserDTO.getAddressDTO());
 		validateEmail(createUserDTO.getEmail());
@@ -59,8 +58,22 @@ public class UserService {
 		}
 	}
 
-	private void validateAddress(AddressDTO addressDTO){
-
+	public void validateAddress(AddressDTO addressDTO){
+		if(addressDTO.getCity() == null){
+			throw new MandatoryFieldException("The city field cannot be empty.");
+		}
+		if(addressDTO.getStreet() == null){
+			throw new MandatoryFieldException("The street field cannot be empty.");
+		}
+		if(addressDTO.getNumber() == null){
+			throw new MandatoryFieldException("The housenumber field cannot be empty.");
+		}
+		if(addressDTO.getCountry() == null){
+			throw new MandatoryFieldException("The country field cannot be empty.");
+		}
+		if(addressDTO.getPostalCode() == null){
+			throw new MandatoryFieldException("The postalcode field cannot be empty.");
+		}
 	}
 
 	public boolean isValidEmailFormat(String email){
