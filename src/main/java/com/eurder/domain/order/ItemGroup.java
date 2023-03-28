@@ -34,7 +34,6 @@ public class ItemGroup {
 	public Price getPricePerItem(){
 		return price;
 	}
-
 	public Price getTotalPrice(){
 		return new Price(price.getCurrency(), (price.getAmount() * amountOfItems));
 	}

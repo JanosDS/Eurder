@@ -1,5 +1,7 @@
 package com.eurder.domain.order;
 
+import com.eurder.domain.item.Currency;
+import com.eurder.domain.item.Price;
 import com.eurder.domain.user.User;
 
 import java.util.List;
@@ -28,4 +30,12 @@ public class Order {
 	public User getCustomer() {
 		return customer;
 	}
+
+	public Price getTotalPrice() {
+		return new Price(Currency.EURO, itemGroupList.stream()
+				.map(ItemGroup::getTotalPrice)
+				.mapToDouble(Price::getAmount)
+				.sum());
+	}
+
 }
