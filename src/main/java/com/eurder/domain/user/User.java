@@ -10,6 +10,7 @@ public class User {
 	private Address address;
 	private String phonenumber;
 	private Role role;
+	private String password;
 
 	public User(String firstname, String lastname, String email, Address address, String phonenumber, Role role) {
 		this.uuid = UUID.randomUUID();
@@ -47,5 +48,13 @@ public class User {
 
 	public Role getRole() {
 		return role;
+	}
+
+	public boolean doesPasswordMatch(String password){
+		return this.password.equals(password);
+	}
+
+	public boolean hasAccessTo(Feature feature){
+		return this.role.hasAccessTo(feature);
 	}
 }
