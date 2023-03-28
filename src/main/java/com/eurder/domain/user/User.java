@@ -9,7 +9,6 @@ public class User {
 	private String email;
 	private Address address;
 	private String phonenumber;
-
 	private Role role;
 
 	public User(String firstname, String lastname, String email, Address address, String phonenumber, Role role) {
@@ -44,5 +43,9 @@ public class User {
 
 	public String getPhonenumber() {
 		return phonenumber;
+	}
+
+	public Role getRole() {
+		return role;
 	}
 }

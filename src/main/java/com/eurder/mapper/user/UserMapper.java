@@ -20,6 +20,6 @@ public class UserMapper {
 	}
 
 	public UserDTO mapToDTO(User user){
-		return new UserDTO();
+		return new UserDTO(user.getUuid(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getAddress(), user.getPhonenumber(), user.getRole());
 	}
 }
