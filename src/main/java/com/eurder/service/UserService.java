@@ -34,6 +34,16 @@ public class UserService {
 						userMapper.mapCreateUserDTOToDomain(Role.setRoleToCustomer(createUserDTO))));
 	}
 
+	public UserDTO createAdmin(CreateUserDTO createUserDTO) {
+		validateMandatoryCustomerFields(createUserDTO);
+		validateAddress(createUserDTO.getAddressDTO());
+		validateEmail(createUserDTO.getEmail());
+
+		return userMapper.mapToDTO(
+				userRepository.addUser(
+						userMapper.mapCreateUserDTOToDomain(Role.setRoleToAdmin(createUserDTO))));
+	}
+
 	private void validateEmail(String email){
 		if(!isValidEmailFormat(email)){
 			throw new InvalidInputException(email + " is not a valid email format.");

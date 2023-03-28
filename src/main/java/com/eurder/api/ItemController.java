@@ -1,15 +1,23 @@
 package com.eurder.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.eurder.dto.ItemDTO;
+import com.eurder.service.ItemService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/item")
 public class ItemController {
 
-	@GetMapping(path = "/hello")
-	public void getHello(){
-		System.out.println("hello");
+	private final ItemService itemService;
+
+	public ItemController(ItemService itemService) {
+		this.itemService = itemService;
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json", produces = "application/json")
+	public ItemDTO addItem(@RequestBody ItemDTO itemDTO){
+		return itemService.addItem(itemDTO);
 	}
 }
