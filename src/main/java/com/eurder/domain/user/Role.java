@@ -8,6 +8,7 @@ import java.util.List;
 public enum Role {
 	CUSTOMER(
 			new ArrayList<>(){{
+				add(Feature.CREATE_ORDER);
 			}}
 	),
 	ADMIN(
