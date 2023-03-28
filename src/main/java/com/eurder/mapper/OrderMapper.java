@@ -3,5 +3,5 @@ package com.eurder.mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
+public class OrderMapper {
 }
