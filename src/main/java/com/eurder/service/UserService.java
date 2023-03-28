@@ -41,7 +41,7 @@ public class UserService {
 		}
 	}
 
-	private void validateMandatoryCustomerFields(CreateUserDTO createUserDTO){
+	public void validateMandatoryCustomerFields(CreateUserDTO createUserDTO){
 		if(createUserDTO.getFirstname() == null){
 			throw new MandatoryFieldException("The firstname field cannot be empty.");
 		}
@@ -53,6 +53,9 @@ public class UserService {
 		}
 		if(createUserDTO.getPhonenumber() == null){
 			throw new MandatoryFieldException("The phone number field cannot be empty.");
+		}
+		if(createUserDTO.getAddressDTO() == null){
+			throw new MandatoryFieldException("The address field cannot be empty.");
 		}
 	}
 

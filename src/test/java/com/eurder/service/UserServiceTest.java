@@ -1,5 +1,8 @@
 package com.eurder.service;
 
+import com.eurder.dto.user.AddressDTO;
+import com.eurder.dto.user.CreateUserDTO;
+import com.eurder.exception.MandatoryFieldException;
 import com.eurder.mapper.user.AddressMapper;
 import com.eurder.mapper.user.UserMapper;
 import com.eurder.repository.UserRepository;
@@ -13,6 +16,7 @@ class UserServiceTest {
 
 	private final String validMailAddress = "janosdescheemaeker@hotmail.com";
 	private final String invalidMailAddress = "janosdescheemaeker@hotmailom";
+
 
 	@BeforeEach
 	void setup(){
@@ -43,8 +47,55 @@ class UserServiceTest {
 		@Test
 		@DisplayName("Validate all inputs given")
 		void validateCustomerMandatoryFields(){
-
+			final CreateUserDTO createUserDTO = new CreateUserDTO("Janos", "Descheemaeker", validMailAddress, new AddressDTO(), "0495188557");
+			userService.validateMandatoryCustomerFields(createUserDTO);
 		}
+
+		@Test
+		@DisplayName("Validate email missing")
+		void validateCustomerMandatoryFields_emailMissing_throwException(){
+			final CreateUserDTO createUserDTO = new CreateUserDTO("Janos", "Descheemaeker", null, new AddressDTO(), "0495188557");
+			Exception exception = assertThrows(MandatoryFieldException.class, () -> {
+				userService.validateMandatoryCustomerFields(createUserDTO);
+			});
+		}
+
+		@Test
+		@DisplayName("Validate firstname missing")
+		void validateCustomerMandatoryFields_firstnameMissing_throwException(){
+			final CreateUserDTO createUserDTO = new CreateUserDTO(null, "Descheemaeker", validMailAddress, new AddressDTO(), "0495188557");
+			Exception exception = assertThrows(MandatoryFieldException.class, () -> {
+				userService.validateMandatoryCustomerFields(createUserDTO);
+			});
+		}
+
+		@Test
+		@DisplayName("Validate lastname missing")
+		void validateCustomerMandatoryFields_lastnameMissing_throwException(){
+			final CreateUserDTO createUserDTO = new CreateUserDTO("Janos", null, validMailAddress, new AddressDTO(), "0495188557");
+			Exception exception = assertThrows(MandatoryFieldException.class, () -> {
+				userService.validateMandatoryCustomerFields(createUserDTO);
+			});
+		}
+
+		@Test
+		@DisplayName("Validate address missing")
+		void validateCustomerMandatoryFields_addressMissing_throwException(){
+			final CreateUserDTO createUserDTO = new CreateUserDTO("Janos", "Descheemaeker", validMailAddress, null, "0495188557");
+			Exception exception = assertThrows(MandatoryFieldException.class, () -> {
+				userService.validateMandatoryCustomerFields(createUserDTO);
+			});
+		}
+
+		@Test
+		@DisplayName("Validate phonenumber missing")
+		void validateCustomerMandatoryFields_phonenumberMissing_throwException(){
+			final CreateUserDTO createUserDTO = new CreateUserDTO("Janos", "Descheemaeker", validMailAddress, new AddressDTO(), null);
+			Exception exception = assertThrows(MandatoryFieldException.class, () -> {
+				userService.validateMandatoryCustomerFields(createUserDTO);
+			});
+		}
+
 	}
 
 }
