@@ -22,6 +22,10 @@ public class OrderRepository {
 		return order;
 	}
 
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+
 	public List<Order> getAllOrdersForUserId(UUID uuid) {
 		return orderList.stream()
 				.filter(order -> order.getCustomer().getUuid().equals(uuid))

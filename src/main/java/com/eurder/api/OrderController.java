@@ -3,15 +3,17 @@ package com.eurder.api;
 import com.eurder.domain.user.Feature;
 import com.eurder.dto.order.CreateOrderDTO;
 import com.eurder.dto.order.OrderDTO;
+import com.eurder.dto.order.ShippingDTO;
 import com.eurder.security.SecurityService;
 import com.eurder.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
 	private final OrderService orderService;
@@ -34,6 +36,12 @@ public class OrderController {
 	public OrderDTO addItem(@RequestHeader String authorization, @PathVariable UUID orderid) {
 		securityService.validateAuthorization(authorization, Feature.CREATE_ORDER);
 		return orderService.reorder(orderid);
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(path = "/shiptoday", produces = "application/json")
+	public List<ShippingDTO> getShipmentsForToday(){
+		return orderService.getShipmentsForToday();
 	}
 
 }

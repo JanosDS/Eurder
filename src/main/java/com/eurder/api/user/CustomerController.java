@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
 public class CustomerController {
 	private final UserService userService;
 	private final OrderService orderService;
@@ -48,8 +48,8 @@ public class CustomerController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "{uuid}", produces = "application/json")
-	public UserDTO getAllCustomers(@RequestHeader String authorization, @PathVariable UUID uuid){
-		securityService.validateAuthorization(authorization, Feature.VIEW_CUSTOMER);
+	public UserDTO getCustomer(@RequestHeader String authorization, @PathVariable UUID uuid){
+		//securityService.validateAuthorization(authorization, Feature.VIEW_CUSTOMER);
 		return userService.getCustomer(uuid);
 	}
 }
