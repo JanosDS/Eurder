@@ -1,5 +1,6 @@
 package com.eurder.dto.order;
 
+import com.eurder.domain.item.Price;
 import com.eurder.dto.user.UserDTO;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public class OrderDTO {
 	private UserDTO customerDTO;
 	private List<ItemGroupDTO> itemGroupDTOList;
 	private UUID orderId;
+	private Price totalPrice;
 
 	public OrderDTO(UserDTO customerDTO, List<ItemGroupDTO> itemGroupDTOList) {
 		this.customerDTO = customerDTO;
@@ -31,5 +33,9 @@ public class OrderDTO {
 
 	public UUID getOrderId() {
 		return orderId;
+	}
+
+	public Price getTotalPrice(){
+		return totalPrice;
 	}
 }

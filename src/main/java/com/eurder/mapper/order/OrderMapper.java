@@ -2,8 +2,12 @@ package com.eurder.mapper.order;
 
 import com.eurder.domain.order.Order;
 import com.eurder.dto.order.OrderDTO;
+import com.eurder.dto.order.OrderReportDTO;
 import com.eurder.mapper.user.UserMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper {
@@ -22,5 +26,15 @@ public class OrderMapper {
 				itemGroupMapper.mapToDTO(order.getItemGroupList()),
 				order.getOrderId()
 		);
+	}
+
+	public List<OrderDTO> mapToDTO(List<Order> orderList) {
+		return orderList.stream()
+				.map(this::mapToDTO)
+				.collect(Collectors.toList());
+	}
+
+	public OrderReportDTO mapToReport(List<OrderDTO> orderDTOList){
+		return new OrderReportDTO(orderDTOList);
 	}
 }

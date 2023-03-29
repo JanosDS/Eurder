@@ -59,4 +59,8 @@ public class OrderService {
 		}
 		return itemGroupDTOList;
 	}
+
+	public OrderReportDTO getAllOrdersForUserId(UUID uuid){
+		return orderMapper.mapToReport(orderMapper.mapToDTO(orderRepository.getAllOrdersForUserId(uuid)));
+	}
 }
