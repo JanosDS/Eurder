@@ -3,8 +3,9 @@ package com.eurder.service;
 import com.eurder.domain.item.Item;
 import com.eurder.domain.order.Order;
 import com.eurder.domain.user.User;
-import com.eurder.dto.order.*;
-import com.eurder.dto.user.UserDTO;
+import com.eurder.dto.order.ItemGroupDTO;
+import com.eurder.dto.order.OrderDTO;
+import com.eurder.dto.order.OrderReportDTO;
 import com.eurder.exception.InvalidInputException;
 import com.eurder.mapper.order.ItemGroupMapper;
 import com.eurder.mapper.order.OrderMapper;
@@ -14,7 +15,6 @@ import com.eurder.repository.OrderRepository;
 import com.eurder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,30 +37,33 @@ public class OrderService {
 		this.itemGroupMapper = itemGroupMapper;
 	}
 
-	public OrderDTO createOrder(CreateOrderDTO createOrderDTO) {
+	public OrderDTO createOrder(OrderDTO orderDTO) {
 		Order order = new Order(
-				itemGroupMapper.mapToDomain(validateItemGroupList(createOrderDTO.getItemGroupDTOList())),
-				validateCustomer(createOrderDTO.getCustomerId())
+				itemGroupMapper.mapToDomain(validateItemGroupList(orderDTO.getItemGroupDTOList())),
+				validateCustomer(orderDTO.getCustomerDTO().getUuid())
 		);
 		return orderMapper.mapToDTO(orderRepository.addOrder(order));
 	}
 
-	public User validateCustomer(UUID userId){
+	public User validateCustomer(UUID userId) {
 		return userRepository.getUserByUuid(userId)
-				.orElseThrow(()-> new InvalidInputException("There is no user with ID: " + userId + ", could not create the order."));
+				.orElseThrow(() -> new InvalidInputException("There is no user with ID: " + userId + ", could not create the order."));
 	}
 
-	public List<ItemGroupDTO> validateItemGroupList(List<CreateItemGroupDTO> createItemGroupDTOList){
-		List<ItemGroupDTO> itemGroupDTOList = new ArrayList<>();
-		for(CreateItemGroupDTO createItemGroupDTO : createItemGroupDTOList){
-			Item item = itemRepository.getItemByUuid(createItemGroupDTO.getItemId())
-					.orElseThrow(() -> new InvalidInputException("There is no item with ID: " + createItemGroupDTO.getItemId() + ", could not place order."));
-			itemGroupDTOList.add(new ItemGroupDTO(item.getUuid(), createItemGroupDTO.getAmountOfItems(), item.getPrice()));
+	public List<ItemGroupDTO> validateItemGroupList(List<ItemGroupDTO> itemGroupDTOList) {
+		for (ItemGroupDTO itemGroupDTO : itemGroupDTOList) {
+			Item item = itemRepository.getItemByUuid(itemGroupDTO.getItemId())
+					.orElseThrow(() -> new InvalidInputException("There is no item with ID: " + itemGroupDTO.getItemId() + ", could not place order."));
 		}
 		return itemGroupDTOList;
 	}
 
-	public OrderReportDTO getAllOrdersForUserId(UUID uuid){
+	public OrderReportDTO getAllOrdersForUserId(UUID uuid) {
 		return orderMapper.mapToReport(orderMapper.mapToDTO(orderRepository.getAllOrdersForUserId(uuid)));
+	}
+
+	public OrderDTO reorder(UUID orderId) {
+		return createOrder(orderMapper.mapToDTO(orderRepository.getOrderForId(orderId)
+				.orElseThrow(() -> new InvalidInputException("There is no order found for the provided ID, cannot reorder."))));
 	}
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -25,5 +26,11 @@ public class OrderRepository {
 		return orderList.stream()
 				.filter(order -> order.getCustomer().getUuid().equals(uuid))
 				.collect(Collectors.toList());
+	}
+
+	public Optional<Order> getOrderForId(UUID orderId){
+		return orderList.stream()
+				.filter(order -> order.getOrderId().equals(orderId))
+				.findFirst();
 	}
 }

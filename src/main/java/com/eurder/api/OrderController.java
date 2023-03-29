@@ -8,6 +8,8 @@ import com.eurder.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -22,9 +24,16 @@ public class OrderController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public OrderDTO addItem(@RequestHeader String authorization, @RequestBody CreateOrderDTO createOrderDTO) {
+	public OrderDTO addItem(@RequestHeader String authorization, @RequestBody OrderDTO orderDTO) {
 		securityService.validateAuthorization(authorization, Feature.CREATE_ORDER);
-		return orderService.createOrder(createOrderDTO);
+		return orderService.createOrder(orderDTO);
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(path = "{orderid}", produces = "application/json")
+	public OrderDTO addItem(@RequestHeader String authorization, @PathVariable UUID orderid) {
+		securityService.validateAuthorization(authorization, Feature.CREATE_ORDER);
+		return orderService.reorder(orderid);
 	}
 
 }
