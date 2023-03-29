@@ -19,6 +19,14 @@ public class ItemDTO {
 		this.amountInStock = amountInStock;
 	}
 
+	public ItemDTO(String name, String description, Price price, int amountInStock) {
+		this.uuid = null;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.amountInStock = amountInStock;
+	}
+
 	public String getName() {
 		return name;
 	}

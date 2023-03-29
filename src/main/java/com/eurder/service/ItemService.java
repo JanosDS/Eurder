@@ -1,6 +1,5 @@
 package com.eurder.service;
 
-import com.eurder.dto.item.CreateItemDTO;
 import com.eurder.dto.item.ItemDTO;
 import com.eurder.exception.MandatoryFieldException;
 import com.eurder.mapper.ItemMapper;
@@ -18,19 +17,24 @@ public class ItemService {
 		this.itemMapper = itemMapper;
 	}
 
-	public ItemDTO addItem(CreateItemDTO createItemDTO){
-		validateMandatoryItemFields(createItemDTO);
-		return itemMapper.mapToDTO(itemRepository.addItem(itemMapper.mapCreateItemDTOToDomain(createItemDTO)));
+	public ItemDTO addItem(ItemDTO itemDTO){
+		validateMandatoryItemFields(itemDTO);
+		return itemMapper.mapToDTO(itemRepository.addItem(itemMapper.mapToDomain(itemDTO)));
 	}
 
-	public void validateMandatoryItemFields(CreateItemDTO createItemDTO){
-		if(createItemDTO.getName() == null){
+	public ItemDTO updateItem(ItemDTO itemDTO){
+		validateMandatoryItemFields(itemDTO);
+		return itemMapper.mapToDTO(itemRepository.updateItem(itemMapper.mapToDomain(itemDTO)));
+	}
+
+	public void validateMandatoryItemFields(ItemDTO itemDTO){
+		if(itemDTO.getName() == null){
 			throw new MandatoryFieldException("The name field cannot be empty");
 		}
-		if(createItemDTO.getDescription() == null){
+		if(itemDTO.getDescription() == null){
 			throw new MandatoryFieldException("The description field cannot be empty");
 		}
-		if(createItemDTO.getPrice() == null){
+		if(itemDTO.getPrice() == null){
 			throw new MandatoryFieldException("The price field cannot be empty");
 		}
 	}

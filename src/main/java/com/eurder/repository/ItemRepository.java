@@ -31,4 +31,11 @@ public class ItemRepository {
 				.filter(item -> item.getUuid().equals(uuid))
 				.findFirst();
 	}
+
+	public Item updateItem(Item item){
+		itemList.set(itemList.indexOf(item), item);
+		return item;
+	}
+
+
 }

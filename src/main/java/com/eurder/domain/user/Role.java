@@ -14,6 +14,7 @@ public enum Role {
 	ADMIN(
 			new ArrayList<>(){{
 				add(Feature.CREATE_ITEM);
+				add(Feature.UPDATE_ITEM);
 				add(Feature.CREATE_ADMIN);
 			}}
 	);
