@@ -1,16 +1,19 @@
 package com.eurder.service;
 
 import com.eurder.domain.user.Role;
+import com.eurder.domain.user.User;
 import com.eurder.dto.user.AddressDTO;
 import com.eurder.dto.user.CreateUserDTO;
 import com.eurder.dto.user.UserDTO;
 import com.eurder.exception.InvalidInputException;
 import com.eurder.exception.MandatoryFieldException;
+import com.eurder.exception.UserNotFoundException;
 import com.eurder.mapper.user.UserMapper;
 import com.eurder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 @Service
@@ -97,5 +100,10 @@ public class UserService {
 
 	public List<UserDTO> getAllCustomers(){
 		return userMapper.mapToDTO(userRepository.getUserList());
+	}
+
+	public UserDTO getCustomer(UUID uuid){
+		return userMapper.mapToDTO(userRepository.getUserByUuid(uuid)
+				.orElseThrow(() -> new UserNotFoundException("No user found for ID: " + uuid)));
 	}
 }

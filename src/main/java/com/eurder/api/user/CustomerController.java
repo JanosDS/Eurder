@@ -45,4 +45,11 @@ public class CustomerController {
 		securityService.validateAuthorization(authorization, Feature.VIEW_ALL_CUSTOMERS);
 		return userService.getAllCustomers();
 	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(path = "{uuid}", produces = "application/json")
+	public UserDTO getAllCustomers(@RequestHeader String authorization, @PathVariable UUID uuid){
+		securityService.validateAuthorization(authorization, Feature.VIEW_CUSTOMER);
+		return userService.getCustomer(uuid);
+	}
 }
