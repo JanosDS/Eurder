@@ -10,6 +10,7 @@ import com.eurder.mapper.user.UserMapper;
 import com.eurder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 @Service
@@ -92,5 +93,9 @@ public class UserService {
 			return false;
 		}
 		return pat.matcher(email).matches();
+	}
+
+	public List<UserDTO> getAllCustomers(){
+		return userMapper.mapToDTO(userRepository.getUserList());
 	}
 }

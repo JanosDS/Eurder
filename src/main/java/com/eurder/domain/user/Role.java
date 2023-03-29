@@ -16,6 +16,7 @@ public enum Role {
 				add(Feature.CREATE_ITEM);
 				add(Feature.UPDATE_ITEM);
 				add(Feature.CREATE_ADMIN);
+				add(Feature.VIEW_ALL_CUSTOMERS);
 			}}
 	);
 
