@@ -1,10 +1,14 @@
 package com.eurder.service;
 
 import com.eurder.dto.item.ItemDTO;
+import com.eurder.dto.item.ItemOverviewDTO;
 import com.eurder.exception.MandatoryFieldException;
 import com.eurder.mapper.ItemMapper;
 import com.eurder.repository.ItemRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ItemService {
@@ -37,5 +41,27 @@ public class ItemService {
 		if(itemDTO.getPrice() == null){
 			throw new MandatoryFieldException("The price field cannot be empty");
 		}
+	}
+
+	public List<ItemDTO> getAllItems(){
+		return itemMapper.mapToDTO(itemRepository.getAllItems());
+	}
+
+	public List<ItemOverviewDTO> getAllItemsOverview(){
+		return new ArrayList<ItemOverviewDTO>(){{
+			add(getLowStockItemsOverview());
+			add(getMediumStockItemsOverview());
+			add(getHighStockItemsOverview());
+		}};
+	}
+
+	public ItemOverviewDTO getLowStockItemsOverview() {
+		return new ItemOverviewDTO("Low Stock", itemMapper.mapToDTO(itemRepository.getLowStockItems()));
+	}
+	public ItemOverviewDTO getMediumStockItemsOverview() {
+		return new ItemOverviewDTO("Medium Stock", itemMapper.mapToDTO(itemRepository.getMediumStockItems()));
+	}
+	public ItemOverviewDTO getHighStockItemsOverview() {
+		return new ItemOverviewDTO("High Stock", itemMapper.mapToDTO(itemRepository.getHighStockItems()));
 	}
 }
