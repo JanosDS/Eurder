@@ -1,6 +1,5 @@
 package com.eurder.service;
 
-import com.eurder.domain.order.ItemGroup;
 import com.eurder.domain.order.Order;
 import com.eurder.domain.user.User;
 import com.eurder.dto.order.ItemGroupDTO;
@@ -17,7 +16,6 @@ import com.eurder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -79,7 +77,5 @@ public class OrderService {
 						.map(itemGroup -> orderMapper.mapToShippingDTO(itemGroup, order)))
 				.collect(Collectors.toList());
 	}
-
-
 
 }

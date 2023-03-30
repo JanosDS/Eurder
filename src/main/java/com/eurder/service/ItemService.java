@@ -56,12 +56,12 @@ public class ItemService {
 	}
 
 	public ItemOverviewDTO getLowStockItemsOverview() {
-		return new ItemOverviewDTO("Low Stock", itemMapper.mapToDTO(itemRepository.getLowStockItems()));
+		return itemMapper.mapToItemOverviewDTO("Low stock", itemRepository.getLowStockItems());
 	}
 	public ItemOverviewDTO getMediumStockItemsOverview() {
-		return new ItemOverviewDTO("Medium Stock", itemMapper.mapToDTO(itemRepository.getMediumStockItems()));
+		return itemMapper.mapToItemOverviewDTO("Medium stock", itemRepository.getMediumStockItems());
 	}
 	public ItemOverviewDTO getHighStockItemsOverview() {
-		return new ItemOverviewDTO("High Stock", itemMapper.mapToDTO(itemRepository.getHighStockItems()));
+		return itemMapper.mapToItemOverviewDTO("High stock", itemRepository.getHighStockItems());
 	}
 }
