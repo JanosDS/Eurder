@@ -7,20 +7,16 @@ import java.util.List;
 import java.util.UUID;
 
 public class OrderDTO {
-	private UserDTO customerDTO;
-	private List<ItemGroupDTO> itemGroupDTOList;
-	private UUID orderId;
-	private Price totalPrice;
+	private final UserDTO customerDTO;
+	private final List<ItemGroupDTO> itemGroupDTOList;
+	private final UUID orderId;
+	private final Price totalPrice;
 
-	public OrderDTO(UserDTO customerDTO, List<ItemGroupDTO> itemGroupDTOList) {
-		this.customerDTO = customerDTO;
-		this.itemGroupDTOList = itemGroupDTOList;
-	}
-
-	public OrderDTO(UserDTO customerDTO, List<ItemGroupDTO> itemGroupDTOList, UUID orderId) {
+	public OrderDTO(UserDTO customerDTO, List<ItemGroupDTO> itemGroupDTOList, UUID orderId, Price totalPrice) {
 		this.customerDTO = customerDTO;
 		this.itemGroupDTOList = itemGroupDTOList;
 		this.orderId = orderId;
+		this.totalPrice = totalPrice;
 	}
 
 	public UserDTO getCustomerDTO() {
@@ -34,8 +30,7 @@ public class OrderDTO {
 	public UUID getOrderId() {
 		return orderId;
 	}
-
-	public Price getTotalPrice(){
+	public Price getTotalPrice() {
 		return totalPrice;
 	}
 }

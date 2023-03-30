@@ -1,11 +1,11 @@
 package com.eurder.dto.user;
 
 public class AddressDTO {
-	private String street;
-	private String houseNumber;
-	private String postalCode;
-	private String city;
-	private String country;
+	private final String street;
+	private final String houseNumber;
+	private final String postalCode;
+	private final String city;
+	private final String country;
 
 	public AddressDTO(String street, String houseNumber, String postalCode, String city, String country) {
 		this.street = street;

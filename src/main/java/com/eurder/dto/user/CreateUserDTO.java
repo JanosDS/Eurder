@@ -8,11 +8,11 @@ import java.util.UUID;
 
 public class CreateUserDTO {
 
-	private String firstname;
-	private String lastname;
-	private String email;
-	private AddressDTO addressDTO;
-	private String phonenumber;
+	private final String firstname;
+	private final String lastname;
+	private final String email;
+	private final AddressDTO addressDTO;
+	private final String phonenumber;
 
 	private Role role;
 	public CreateUserDTO(String firstname, String lastname, String email, AddressDTO addressDTO, String phonenumber) {

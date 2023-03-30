@@ -18,6 +18,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	private void mandatoryFieldException(MandatoryFieldException exception, HttpServletResponse response) throws IOException {
 		response.sendError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
 	}
+
 	@ExceptionHandler(InvalidInputException.class)
 	private void invalidInputException(InvalidInputException exception, HttpServletResponse response) throws IOException {
 		response.sendError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());

@@ -2,9 +2,7 @@ package com.eurder.dto.order;
 
 import com.eurder.domain.item.Currency;
 import com.eurder.domain.item.Price;
-import com.eurder.domain.order.ItemGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderReportDTO {

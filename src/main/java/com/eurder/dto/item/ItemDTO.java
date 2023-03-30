@@ -5,11 +5,11 @@ import com.eurder.domain.item.Price;
 import java.util.UUID;
 
 public class ItemDTO {
-	private UUID uuid;
-	private String name;
-	private String description;
-	private Price price;
-	private int amountInStock;
+	private final UUID uuid;
+	private final String name;
+	private final String description;
+	private final Price price;
+	private final int amountInStock;
 
 	public ItemDTO(UUID uuid, String name, String description, Price price, int amountInStock) {
 		this.uuid = uuid;

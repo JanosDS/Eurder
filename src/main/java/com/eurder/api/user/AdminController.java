@@ -21,7 +21,7 @@ public class AdminController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes = "application/json", produces = "application/json")
-	public UserDTO createAdmin(@RequestHeader String authorization, @RequestBody CreateUserDTO createUserDTO){
+	public UserDTO createAdmin(@RequestHeader String authorization, @RequestBody CreateUserDTO createUserDTO) {
 		securityService.validateAuthorization(authorization, Feature.CREATE_ADMIN);
 		return userService.createAdmin(createUserDTO);
 	}

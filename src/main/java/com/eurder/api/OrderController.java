@@ -39,7 +39,7 @@ public class OrderController {
 
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping(path = "/shiptoday", produces = "application/json")
-	public List<ShippingDTO> getShipmentsForToday(){
+	public List<ShippingDTO> getShipmentsForToday() {
 		return orderService.getShipmentsForToday();
 	}
 

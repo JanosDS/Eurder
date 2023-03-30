@@ -24,7 +24,8 @@ public class OrderMapper {
 		return new OrderDTO(
 				userMapper.mapToDTO(order.getCustomer()),
 				itemGroupMapper.mapToDTO(order.getItemGroupList()),
-				order.getOrderId()
+				order.getOrderId(),
+				order.getTotalPrice()
 		);
 	}
 
@@ -34,7 +35,7 @@ public class OrderMapper {
 				.collect(Collectors.toList());
 	}
 
-	public OrderReportDTO mapToReport(List<OrderDTO> orderDTOList){
+	public OrderReportDTO mapToReport(List<OrderDTO> orderDTOList) {
 		return new OrderReportDTO(orderDTOList);
 	}
 }

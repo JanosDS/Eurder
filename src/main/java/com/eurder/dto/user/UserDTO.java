@@ -6,13 +6,13 @@ import com.eurder.domain.user.Role;
 import java.util.UUID;
 
 public class UserDTO {
-	private UUID uuid;
-	private String firstname;
-	private String lastname;
-	private String email;
-	private Address address;
-	private String phonenumber;
-	private Role role;
+	private final UUID uuid;
+	private final String firstname;
+	private final String lastname;
+	private final String email;
+	private final Address address;
+	private final String phonenumber;
+	private final Role role;
 
 	public UserDTO(UUID uuid, String firstname, String lastname, String email, Address address, String phonenumber, Role role) {
 		this.uuid = uuid;

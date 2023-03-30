@@ -20,9 +20,9 @@ public class Price {
 		return amount;
 	}
 
-	public Price addPrice(Price price){
-		if(this.currency == price.getCurrency()){
-			return new Price(currency, this.amount+price.getAmount());
+	public Price addPrice(Price price) {
+		if (this.currency == price.getCurrency()) {
+			return new Price(currency, this.amount + price.getAmount());
 		}
 		throw new InvalidInputException("Cannot add prices in 2 different currencies.");
 	}

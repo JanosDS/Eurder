@@ -41,27 +41,30 @@ public class ItemController {
 	public List<ItemDTO> getAllItems() {
 		return itemService.getAllItems();
 	}
+
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path ="/overview", produces = "application/json")
+	@GetMapping(path = "/overview", produces = "application/json")
 	public List<ItemOverviewDTO> getAllItemsOverview(@RequestHeader String authorization) {
 		securityService.validateAuthorization(authorization, Feature.VIEW_STOCK_OVERVIEW);
 		return itemService.getAllItemsOverview();
 	}
 
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path ="/overview/lowstock", produces = "application/json")
+	@GetMapping(path = "/overview/lowstock", produces = "application/json")
 	public ItemOverviewDTO getLowStockItemsOverview(@RequestHeader String authorization) {
 		securityService.validateAuthorization(authorization, Feature.VIEW_STOCK_OVERVIEW);
 		return itemService.getLowStockItemsOverview();
 	}
+
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path ="/overview/mediumstock", produces = "application/json")
+	@GetMapping(path = "/overview/mediumstock", produces = "application/json")
 	public ItemOverviewDTO getMediumStockItemsOverview(@RequestHeader String authorization) {
 		securityService.validateAuthorization(authorization, Feature.VIEW_STOCK_OVERVIEW);
 		return itemService.getMediumStockItemsOverview();
 	}
+
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping(path ="/overview/highstock", produces = "application/json")
+	@GetMapping(path = "/overview/highstock", produces = "application/json")
 	public ItemOverviewDTO getHighStockItemsOverview(@RequestHeader String authorization) {
 		securityService.validateAuthorization(authorization, Feature.VIEW_STOCK_OVERVIEW);
 		return itemService.getMediumStockItemsOverview();
