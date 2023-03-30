@@ -11,12 +11,6 @@ public class ItemGroupDTO {
 	private Price price;
 	private LocalDate shippingDate;
 
-	public ItemGroupDTO(UUID itemId, int amount, Price price) {
-		this.itemId = itemId;
-		this.amountOfItems = amount;
-		this.price = price;
-	}
-
 	public ItemGroupDTO(UUID itemId, int amountOfItems, Price price, LocalDate shippingDate) {
 		this.itemId = itemId;
 		this.amountOfItems = amountOfItems;

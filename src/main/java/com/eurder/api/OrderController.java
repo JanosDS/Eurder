@@ -1,7 +1,6 @@
 package com.eurder.api;
 
 import com.eurder.domain.user.Feature;
-import com.eurder.dto.order.CreateOrderDTO;
 import com.eurder.dto.order.OrderDTO;
 import com.eurder.dto.order.ShippingDTO;
 import com.eurder.security.SecurityService;
