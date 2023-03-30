@@ -76,9 +76,7 @@ public class OrderService {
 				.flatMap(order -> order.getItemGroupList()
 						.stream()
 						.filter(itemGroup -> itemGroup.getShippingDate().isEqual(LocalDate.now()))
-						.map(itemGroup -> new ShippingDTO(itemGroup.getItemId(), order.getOrderId(),
-								itemGroup.getAmountOfItems(), itemGroup.getTotalPrice(), itemGroup.getShippingDate(),
-								addressMapper.mapToDTO(order.getCustomer().getAddress()))))
+						.map(itemGroup -> orderMapper.mapToShippingDTO(itemGroup, order)))
 				.collect(Collectors.toList());
 	}
 
