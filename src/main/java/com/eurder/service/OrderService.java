@@ -1,6 +1,5 @@
 package com.eurder.service;
 
-import com.eurder.domain.item.Item;
 import com.eurder.domain.order.ItemGroup;
 import com.eurder.domain.order.Order;
 import com.eurder.domain.user.User;
@@ -21,11 +20,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
-
-
 	private final OrderRepository orderRepository;
 	private final OrderMapper orderMapper;
 	private final UserRepository userRepository;
@@ -57,7 +55,7 @@ public class OrderService {
 
 	public List<ItemGroupDTO> validateItemGroupList(List<ItemGroupDTO> itemGroupDTOList) {
 		for (ItemGroupDTO itemGroupDTO : itemGroupDTOList) {
-			Item item = itemRepository.getItemByUuid(itemGroupDTO.getItemId())
+			itemRepository.getItemByUuid(itemGroupDTO.getItemId())
 					.orElseThrow(() -> new InvalidInputException("There is no item with ID: " + itemGroupDTO.getItemId() + ", could not place order."));
 		}
 		return itemGroupDTOList;
@@ -73,24 +71,17 @@ public class OrderService {
 	}
 
 	public List<ShippingDTO> getShipmentsForToday() {
-		List<Order> orders = orderRepository.getOrderList();
-		List<ShippingDTO> shippingList = new ArrayList<>();
-		for (Order order : orders) {
-			shippingList.addAll(createShippingListForOrder(order));
-		}
-		return shippingList;
+		return orderRepository.getOrderList()
+				.stream()
+				.flatMap(order -> order.getItemGroupList()
+						.stream()
+						.filter(itemGroup -> itemGroup.getShippingDate().isEqual(LocalDate.now()))
+						.map(itemGroup -> new ShippingDTO(itemGroup.getItemId(), order.getOrderId(),
+								itemGroup.getAmountOfItems(), itemGroup.getTotalPrice(), itemGroup.getShippingDate(),
+								addressMapper.mapToDTO(order.getCustomer().getAddress()))))
+				.collect(Collectors.toList());
 	}
 
 
-	public List<ShippingDTO> createShippingListForOrder(Order order) {
-		List<ShippingDTO> tempList = new ArrayList<>();
-		for (ItemGroup itemGroup : order.getItemGroupList()) {
-			if (itemGroup.getShippingDate().equals(LocalDate.now())) {
-				tempList.add(new ShippingDTO(itemGroup.getItemId(), order.getOrderId(),
-						itemGroup.getAmountOfItems(), itemGroup.getTotalPrice(), itemGroup.getShippingDate(),
-						addressMapper.mapToDTO(order.getCustomer().getAddress())));
-			}
-		}
-		return tempList;
-	}
+
 }
