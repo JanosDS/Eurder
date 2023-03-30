@@ -1,5 +1,7 @@
 package com.eurder.mapper.order;
 
+import com.eurder.domain.item.Currency;
+import com.eurder.domain.item.Price;
 import com.eurder.domain.order.Order;
 import com.eurder.dto.order.OrderDTO;
 import com.eurder.dto.order.OrderReportDTO;
@@ -36,6 +38,9 @@ public class OrderMapper {
 	}
 
 	public OrderReportDTO mapToReport(List<OrderDTO> orderDTOList) {
-		return new OrderReportDTO(orderDTOList);
+		return new OrderReportDTO(orderDTOList, orderDTOList.stream()
+				.map(OrderDTO::getTotalPrice)
+				.reduce(new Price(Currency.EURO, 0), Price::addPrice));
+
 	}
 }
