@@ -6,7 +6,6 @@ import com.eurder.exception.MandatoryFieldException;
 import com.eurder.mapper.ItemMapper;
 import com.eurder.repository.ItemRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
