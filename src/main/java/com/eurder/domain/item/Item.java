@@ -11,8 +11,8 @@ public class Item {
 	private Price price;
 	private int amountInStock;
 
-	public Item(String name, String description, Price price, int amountInStock) {
-		this.uuid = UUID.randomUUID();
+	public Item(UUID uuid, String name, String description, Price price, int amountInStock) {
+		this.uuid = uuid;
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -37,6 +37,10 @@ public class Item {
 
 	public int getAmountInStock() {
 		return amountInStock;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

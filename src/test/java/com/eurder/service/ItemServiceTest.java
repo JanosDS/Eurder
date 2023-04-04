@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,7 +21,7 @@ class ItemServiceTest {
 
 	@BeforeEach
 	void setup() {
-		this.itemService = new ItemService(new ItemRepository(), new ItemMapper());
+		this.itemService = new ItemService(new ItemRepository(new JdbcTemplate()), new ItemMapper());
 	}
 
 	@Nested

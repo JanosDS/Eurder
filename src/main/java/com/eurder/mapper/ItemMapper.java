@@ -6,6 +6,7 @@ import com.eurder.dto.item.ItemOverviewDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -13,7 +14,8 @@ public class ItemMapper {
 
 
 	public Item mapToDomain(ItemDTO itemDTO) {
-		return new Item(itemDTO.getName(), itemDTO.getDescription(), itemDTO.getPrice(), itemDTO.getAmountInStock());
+		UUID uuid = UUID.randomUUID();
+		return new Item(uuid, itemDTO.getName(), itemDTO.getDescription(), itemDTO.getPrice(), itemDTO.getAmountInStock());
 	}
 
 	public ItemDTO mapToDTO(Item item) {
